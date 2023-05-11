@@ -36,6 +36,17 @@ app.post("/webscrap", async (req, res) => {
   return res.status(200).send("Scrapping Done");
 });
 
+app.get("/alldata", async (req, res) => {
+  await countries
+    .find({})
+    .then((result) => {
+      return res.status(200).json({ status: 0, data: result });
+    })
+    .catch((err) => {
+      return res.status(400).json({ status: -1, error: err.message });
+    });
+});
+
 app.listen(port, () => {
   console.log(`Server is running at port: ${port}`);
 });
